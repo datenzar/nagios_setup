@@ -6,7 +6,8 @@ apt-get update
 apt-get upgrade -y
 apt-get dist-upgrade -y
 apt-get autoremove -y
-apt-get install build-essential libgd2-xpm-dev openssl libssl-dev apache2-utils apache2 php5 -y
+apt-get install build-essential libgd2-xpm-dev openssl libssl-dev apache2-utils apache2 php -y
+apt-get install wget php apache2-mod-php7.0 php-gd libgd-dev sendmail unzip -y 
 dd if=/dev/zero of=/swap bs=1024 count=2097152
 mkswap /swap && sudo chown root. /swap && sudo chmod 0600 /swap && sudo swapon /swap
 sh -c "echo /swap swap swap defaults 0 0 >> /etc/fstab"
@@ -15,9 +16,9 @@ useradd nagios
 groupadd nagcmd
 usermod -a -G nagcmd nagios
 cd /root
-curl -L -O http://prdownloads.sourceforge.net/sourceforge/nagios/nagios-4.0.8.tar.gz
+curl -L -O https://sourceforge.net/projects/nagios/files/nagios-4.x/nagios-4.3.4/nagios-4.3.4.tar.gz
 tar xvf nagios-*.tar.gz
-cd nagios-4.0.8
+cd nagios-4.*
 ./configure --with-nagios-group=nagios --with-command-group=nagcmd
 make all
 make install
@@ -26,9 +27,9 @@ make install-init
 make install-config
 /usr/bin/install -c -m 644 sample-config/httpd.conf /etc/apache2/sites-available/nagios.conf
 cd ../
-curl -L -O http://nagios-plugins.org/download/nagios-plugins-2.0.3.tar.gz
+curl -L -O http://nagios-plugins.org/download/nagios-plugins-2.2.1.tar.gz
 tar xvf nagios-plugins-*.tar.gz
-cd nagios-plugins-2.0.3
+cd nagios-plugins-*
 ./configure --with-nagios-user=nagios --with-nagios-group=nagios --with-openssl
 make
 make install
