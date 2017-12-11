@@ -2,6 +2,7 @@ NAGIOS SERVER 4.0.8
 -------------------
 ```
 sudo su
+export DEBIAN_FRONTEND=noninteractive
 apt-get update
 apt-get upgrade -y
 apt-get dist-upgrade -y
